@@ -19,7 +19,6 @@ jobs:
     steps:
       - checkout
       - run: echo "second hello"
-      - run: sleep 15
       - attach_workspace: 
         at: my_workspace
 
@@ -36,6 +35,6 @@ workflows:
     jobs:
       - one
       - two:
-        requires:
-          - one
+          requires:
+            - one
 
