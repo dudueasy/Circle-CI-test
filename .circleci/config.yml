@@ -2,7 +2,8 @@ version: 2.1
 executors:
   my-executor: 
     docker:
-      - image: circleci/frontend
+      - image: circleci/node:10.0-browsers
+      - image: circleci/mongo:4.1.7-xenial
 jobs:
   build:
     executor: my-executor
