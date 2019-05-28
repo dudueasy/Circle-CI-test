@@ -1,15 +1,10 @@
 version: 2.1
-executors:
-  my-executor: 
-     docker:
-          - image: circleci/node:10.0-browsers
-          - image: circleci/mongo:4.0.4-xenial-ram
+
 jobs:
   build:
-    executor: my-executor
+    docker:
+      - image: circleci/node:10.0-browsers
+      - image: circleci/mongo:4.0.4-xenial-ram
+
     steps:
       - run: echo "A first hello"
-  # two:
-  #   executor: my-executor
-  #   steps:
-  #     - run: echo "A more familiar hi"
