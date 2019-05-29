@@ -19,7 +19,7 @@ jobs:
     steps:
       - run: echo "A first hello"
 
-  another_job:
+  test:
     executor: my-executor
     steps:
-      - run: echo "Another job is called"
+      - run: echo "test job is called"
