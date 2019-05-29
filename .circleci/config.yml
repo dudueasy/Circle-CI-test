@@ -4,9 +4,22 @@ executors:
     docker: 
       -image: circleci/node:12.1-stretch
 
+
+commands:
+  my-command:
+    description: 'this is my command'
+    steps:
+      - run: echo 'my-command is called'
+          
+
 jobs:
   build:
     executor: my-executor
 
     steps:
       - run: echo "A first hello"
+
+  another_job:
+    executor: my-executor
+    steps:
+      -run: echo "Another job is called"
