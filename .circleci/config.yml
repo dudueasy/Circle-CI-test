@@ -1,10 +1,12 @@
 version: 2.1
+executors:
+  my-executor:
+    docker: 
+      -image: circleci/node:12.1-stretch
 
 jobs:
   build:
-    docker:
-      - image: circleci/node:10.0-browsers
-      - image: circleci/mongo:4.0.4-xenial-ram
+    executor: my-executor
 
     steps:
       - run: echo "A first hello"
