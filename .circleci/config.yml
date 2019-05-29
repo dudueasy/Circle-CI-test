@@ -15,17 +15,11 @@ commands:
 
 jobs:
   build:
-    executor: my-executor
+    executor: my-executor 
+    parallelism: 2
+    environment: 
+      Foo: 'bar'
 
     steps:
       - run: echo "A first hello" 
-    parallelism: 2
-
-
-  test:
-    executor: my-executor
-    steps:
-      - run: echo "test job is called"
-
-
-
+      - run: echo $Foo 
