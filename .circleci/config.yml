@@ -2,7 +2,7 @@ version: 2.1
 executors:
   my-executor:
     docker: 
-      -image: circleci/node:12.1-stretch
+      - image: circleci/node:12.1-stretch
 
 
 commands:
@@ -22,4 +22,4 @@ jobs:
   another_job:
     executor: my-executor
     steps:
-      -run: echo "Another job is called"
+      - run: echo "Another job is called"
