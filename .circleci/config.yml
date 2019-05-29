@@ -1,25 +1,26 @@
 version: 2.1
-executors:
+executors: # define execution environment for jobs
   my-executor:
     docker: 
-      - image: circleci/node:12.1-stretch
-
+      - image: circleci/node:12.1-stretch 
 
 commands:
   my-command:
     description: 'this is my command'
     steps:
-      - run: echo 'my-command is called'
-
+      - run: echo 'my-command is called' 
           
 
 jobs:
-  build:
-    executor: my-executor 
-    parallelism: 2
-    environment: 
+  build:  # define circleci default entrypoint job: build
+    executor: my-executor  # use predefined executor
+    parallelism: 2         # run this job in 2 containers in parallel
+    environment:           # define environment variables for job: build
       Foo: 'bar'
 
-    steps:
+    steps:               # define exact task to be executed in job : build
       - run: echo "A first hello" 
       - run: echo $Foo 
+      - run:
+          name: Running tests
+          command: make test
