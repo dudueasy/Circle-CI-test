@@ -38,7 +38,7 @@ jobs:
           echo "111"  >> ~/workspace/info
       - persist_to_workspace:
           root: '~/workspace'
-          paths: '*'
+          paths: *
 
   my_second_job:
     executor: my-executor
