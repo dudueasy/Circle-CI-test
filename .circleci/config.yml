@@ -31,8 +31,8 @@ jobs:
           steps:
             - run: echo "preinstall"
       - run: |
-          if [ ! -d ~/workspace/info ]; then
-            mkdir -p ~/workspace/info
+          if [ ! -d ~/workspace/ ]; then
+            mkdir -p ~/workspace/
           fi
 
           echo "111"  >> ~/workspace/info
