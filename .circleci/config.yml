@@ -27,3 +27,33 @@ jobs:
       - checkout
       - run: ls
           
+
+  myjob:
+    parameters:
+      preinstall-foo:
+        type: boolean
+        default: false
+    executor: my-executor
+    steps:
+      - run: echo "preinstall is << parameters.preinstall-foo >>"
+      - when:
+          condition: << parameters.preinstall-foo >>
+          steps:
+            - run: echo "preinstall"
+      - unless:
+          condition: << parameters.preinstall-foo >>
+          steps:
+            - run: echo "don't preinstall"
+
+
+workflows:
+  workflow:
+    jobs:
+      - build
+      - myjob:
+          preinstall-foo: false
+      - myjob: 
+          preinstall-foo: true
+
+
+
