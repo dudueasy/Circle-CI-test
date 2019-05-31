@@ -41,15 +41,11 @@ jobs:
 
     executor: my-executor
     steps:
-      - run: echo "preinstall is << parameters.preinstall-foo >>"
+      - run: echo "preinstall is << parameters.run_when_step >>"
       - when:
           condition: << parameters.run_when_step>>
           steps:
             - run: echo "preinstall"
-      - unless:
-          condition: << parameters.preinstall-foo >>
-          steps:
-            - run: echo "don't preinstall"
 
 
 workflows:
@@ -58,8 +54,6 @@ workflows:
       - build
       - myjob:
           run_when_step: RUN_WHEN
-      - myjob:
-          preinstall-foo: true
 
 
 
