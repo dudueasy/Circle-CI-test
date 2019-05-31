@@ -47,7 +47,7 @@ jobs:
       - run: echo 'second job is running' 
       - attach_workspace: 
           at: '~/my_workspace' 
-      - run: cat '~/my_workspace/info'
+      - run: cat ~/my_workspace/info
           
 
 
