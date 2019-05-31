@@ -14,7 +14,7 @@ commands:
 jobs:
   build:  # define circleci default entrypoint job: build
     executor: my-executor  # use predefined executor
-    # parallelism: 2         # run this job in 2 containers in parallel
+    parallelism: 2         # run this job in 2 containers in parallel
     environment:           # define environment variables for job: build
       Foo: 'bar'
 
