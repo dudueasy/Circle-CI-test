@@ -31,7 +31,10 @@ jobs:
           steps:
             - run: echo "preinstall"
       - run: |
-          mkdir -p ~/workspace/info
+          if [ ! -d ~/workspace/info ]; then
+            mkdir -p ~/workspace/info
+          fi
+
           echo "111"  >> ~/workspace/info
       - persist_to_workspace:
           root: '~/workspace'
