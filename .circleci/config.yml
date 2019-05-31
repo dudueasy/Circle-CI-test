@@ -29,15 +29,22 @@ jobs:
           
 
   myjob:
+    environment:
+      RUN_WHEN:
+        true
     parameters:
       preinstall-foo:
         type: boolean
         default: false
+      run_when_step:
+        type: env_var_name
+        default: false
+
     executor: my-executor
     steps:
       - run: echo "preinstall is << parameters.preinstall-foo >>"
       - when:
-          condition: << parameters.preinstall-foo >>
+          condition: << parameters.run_when_step>>
           steps:
             - run: echo "preinstall"
       - unless:
@@ -52,8 +59,8 @@ workflows:
       - build
       - myjob:
           preinstall-foo: false
-      # - myjob:
-          # preinstall-foo: true
+      - myjob:
+          preinstall-foo: true
 
 
 
