@@ -64,19 +64,21 @@ jobs:
 workflows:
   workflow:
     jobs:
-      - approval_job:
-          type: approval
-      - myjob:
-          run_when_step: RUN_WHEN
-      - my_second_job:
-          requires:
-            - myjob
-      - simple_job:
-          name: 'first simple job'
-      - simple_job:
-          name: 'second simple job'
-      - simple_job:
-          name: 'third simple job'
-      - simple_job:
-          name: 'fourth simple job'
+      # - approval_job:
+      #     type: approval
+      # - myjob:
+      #     run_when_step: RUN_WHEN
+      # - my_second_job:
+      #     requires:
+      #       - myjob
+      # - simple_job:
+      #     name: 'first simple job'
+      # - simple_job:
+      #     name: 'second simple job'
+      # - simple_job:
+      #     name: 'third simple job'
+      # - simple_job:
+      #     name: 'fourth simple job'
 
+      - simple_job
+      - simple_job
