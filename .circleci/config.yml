@@ -49,15 +49,22 @@ jobs:
           at: '~/my_workspace' 
       - run: cat ~/my_workspace/info
           
-
+  approval_job:
+    executor: my-executor
+    steps:
+      - run: echo 'approval_job is called'
+      
 
 
 workflows:
   workflow:
     jobs:
       - myjob:
-          type: approval
           run_when_step: RUN_WHEN
       - my_second_job:
           requires:
             - myjob
+      - approval_job:
+          type: approval
+
+
