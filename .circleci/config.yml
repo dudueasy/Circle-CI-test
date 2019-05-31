@@ -32,7 +32,7 @@ jobs:
             - run: echo "preinstall"
       - run: |
           mkdir -p ~/workspace/info
-          echo "111"  >> '~/workspace/info'
+          echo "111"  >> ~/workspace/info
       - persist_to_workspace:
           root: '~/workspace'
           paths: '*'
