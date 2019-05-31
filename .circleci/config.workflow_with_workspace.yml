@@ -56,7 +56,6 @@ workflows:
   workflow:
     jobs:
       - myjob:
-          type: approval
           run_when_step: RUN_WHEN
       - my_second_job:
           requires:
