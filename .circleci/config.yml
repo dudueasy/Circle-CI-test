@@ -30,7 +30,8 @@ jobs:
           condition: << parameters.run_when_step>>
           steps:
             - run: echo "preinstall"
-      - run: 
+      - run: |
+          mkdir -p ~/workspace/info
           echo "111"  >> '~/workspace/info'
       - persist_to_workspace:
           root: '~/workspace'
