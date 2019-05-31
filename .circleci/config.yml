@@ -52,8 +52,8 @@ workflows:
       - build
       - myjob:
           preinstall-foo: false
-      - myjob: 
-          preinstall-foo: true
+      # - myjob:
+          # preinstall-foo: true
 
 
 
