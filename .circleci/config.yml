@@ -11,23 +11,7 @@ commands:
       - run: echo 'my-command is called' 
           
 
-jobs:
-  build:  # define circleci default entrypoint job: build
-    executor: my-executor  # use predefined executor
-    parallelism: 2         # run this job in 2 containers in parallel
-    environment:           # define environment variables for job: build
-      Foo: 'bar'
-
-    steps:               # define exact task to be executed in job : build
-      - run: echo "A first hello" 
-      - run: echo $Foo 
-      - run:
-          name: Running tests
-          command: echo "make test"
-      - checkout
-      - run: ls
-          
-
+jobs: 
   myjob:
     environment:
       RUN_WHEN: true
@@ -46,14 +30,28 @@ jobs:
           condition: << parameters.run_when_step>>
           steps:
             - run: echo "preinstall"
+      - run: 
+          echo "111"  >> '~/workspace/info'
+      - persist_to_workspace:
+          root: '~/workspace'
+          paths: '*'
+
+  my_second_job:
+    executor: my-executor
+    steps:
+      - run: echo 'second job is running' 
+      - attach_workspace: 
+          at: '~/workspace' 
+      - run: cat '~/workspace/info'
+          
+
 
 
 workflows:
   workflow:
     jobs:
-      - build
       - myjob:
           run_when_step: RUN_WHEN
-
-
-
+      - my_second_job:
+          requires:
+            - myjob
