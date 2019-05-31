@@ -30,15 +30,14 @@ jobs:
 
   myjob:
     environment:
-      RUN_WHEN:
-        true
+      RUN_WHEN: true
     parameters:
       preinstall-foo:
         type: boolean
         default: false
       run_when_step:
         type: env_var_name
-        default: false
+        default: WHATEVER
 
     executor: my-executor
     steps:
@@ -58,7 +57,7 @@ workflows:
     jobs:
       - build
       - myjob:
-          preinstall-foo: false
+          run_when_step: RUN_WHEN
       - myjob:
           preinstall-foo: true
 
