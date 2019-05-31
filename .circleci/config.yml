@@ -31,22 +31,23 @@ jobs:
           steps:
             - run: echo "preinstall"
       - run: |
-          if [ ! -d ~/workspace/ ]; then
-            mkdir -p ~/workspace/
+          if [ ! -d ~/my_workspace/ ]; then
+            mkdir -p ~/my_workspace/
           fi
 
-          echo "111"  >> ~/workspace/info
+          echo "111"  >> ~/my_workspace/info
       - persist_to_workspace:
-          root: '~/workspace'
-          paths: *
+          root: '~/my_workspace'
+          paths: 
+            - '*'
 
   my_second_job:
     executor: my-executor
     steps:
       - run: echo 'second job is running' 
       - attach_workspace: 
-          at: '~/workspace' 
-      - run: cat '~/workspace/info'
+          at: '~/my_workspace' 
+      - run: cat '~/my_workspace/info'
           
 
 
