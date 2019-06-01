@@ -1,0 +1,25 @@
+version: 2.1
+executors:
+  node-executor: 
+    docker: 
+      - image: circleci/node:12.1-stretch 
+
+jobs:
+  build:
+    executor: node-executor
+    steps:
+      - checkout
+      - run: yarn build
+      
+
+  test: 
+    executor: node-executor
+    steps:
+      - checkout
+      - run: yarn test
+
+workflows:
+  build_and_test:
+    jobs: 
+      - test
+      - build 
