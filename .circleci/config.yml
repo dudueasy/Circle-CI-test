@@ -1,89 +1,17 @@
 version: 2.1
-executors: # define execution environment for jobs
-  my-executor:
-    docker: 
-      - image: circleci/node:12.1-stretch 
+orbs: 
+  hello: circleci/hello-build@0.0.14
 
-commands:
-  my-command:
-    parameters: 
-      output: 
-        type: string 
-    description: 'this is my command'
+jobs:
+  run-orbs-commands:
+    executor: hello/default
     steps:
-      - run: echo 'my-command is called' 
-      - run: echo << parameters.output >>
-          
-
-jobs: 
-  myjob:
-    environment:
-      RUN_WHEN: true
-    parameters:
-      preinstall-foo:
-        type: boolean
-        default: false
-      run_when_step:
-        type: env_var_name
-        default: WHATEVER
-
-    executor: my-executor
-    steps:
-      - run: echo "preinstall is << parameters.run_when_step >>"
-      - when:
-          condition: << parameters.run_when_step>>
-          steps:
-            - run: echo "preinstall"
-      - run: |
-          if [ ! -d ~/my_workspace/ ]; then
-            mkdir -p ~/my_workspace/
-          fi
-
-          echo "111"  >> ~/my_workspace/info
-      - persist_to_workspace:
-          root: '~/my_workspace'
-          paths: 
-            - '*'
-
-  my_second_job:
-    executor: my-executor
-    steps:
-      - run: echo 'second job is running' 
-      - attach_workspace: 
-          at: '~/my_workspace' 
-      - run: cat ~/my_workspace/info
-          
-  approval_job:
-    executor: my-executor
-    steps:
-      - run: echo 'approval_job is called'
-
-  simple_job:
-    executor: my-executor
-    steps:
-      - run: echo 'simple job will run simultaneous in workflows'
-      - my-command:
-          output: 'output for my-command'
+      - hello/system-info
+      - hello/hello-triggerer
 
 
 workflows:
-  workflow:
+  workflow: 
     jobs:
-      # - approval_job:
-      #     type: approval
-      # - myjob:
-      #     run_when_step: RUN_WHEN
-      # - my_second_job:
-      #     requires:
-      #       - myjob
-      # - simple_job:
-      #     name: 'first simple job'
-      # - simple_job:
-      #     name: 'second simple job'
-      # - simple_job:
-      #     name: 'third simple job'
-      # - simple_job:
-      #     name: 'fourth simple job'
-
-      - simple_job
-      - simple_job
+      - run-orbs-commands
+      - hello/hello-build
