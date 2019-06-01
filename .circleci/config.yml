@@ -58,7 +58,7 @@ jobs:
     executor: my-executor
     steps:
       - run: echo 'simple job will run simultaneous in workflows'
-    
+      - my-command 
 
 
 workflows:
