@@ -6,9 +6,13 @@ executors: # define execution environment for jobs
 
 commands:
   my-command:
+    parameters: 
+      output: 
+        type: string 
     description: 'this is my command'
     steps:
       - run: echo 'my-command is called' 
+      - run: echo << parameters.output >>
           
 
 jobs: 
@@ -58,7 +62,8 @@ jobs:
     executor: my-executor
     steps:
       - run: echo 'simple job will run simultaneous in workflows'
-      - my-command 
+      - my-command:
+          output: 'output for my-command'
 
 
 workflows:

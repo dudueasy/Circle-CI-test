@@ -1,0 +1,25 @@
+version: 2.1
+executors: # define execution environment for jobs
+  my-executor:
+    docker: 
+      - image: circleci/node:12.1-stretch 
+
+commands:
+  my-command:
+    description: 'this is my command'
+    steps:
+      - run: echo 'my-command is called' 
+          
+
+jobs: 
+  simple_job:
+    executor: my-executor
+    steps:
+      - run: echo 'simple job will run simultaneous in workflows'
+      - my-command 
+
+
+workflows:
+  workflow:
+    jobs:
+      - simple_job
