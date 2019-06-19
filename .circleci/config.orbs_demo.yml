@@ -1,0 +1,17 @@
+version: 2.1
+orbs: 
+  hello: circleci/hello-build@0.0.14
+
+jobs:
+  run-orbs-commands:
+    executor: hello/default
+    steps:
+      - hello/system-info
+      - hello/hello-triggerer
+
+
+workflows:
+  workflow: 
+    jobs:
+      - run-orbs-commands
+      - hello/hello-build

@@ -1,0 +1,13 @@
+# A simplest config for circleci project that 
+# meet minimum requirements
+version: 2.1
+executors: # define execution environment for jobs
+  my-executor:
+    docker: 
+      - image: circleci/node:12.1-stretch 
+
+jobs:
+  build:
+    executor: my-executor
+    steps:
+      - run: "echo 123"
