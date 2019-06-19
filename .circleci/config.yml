@@ -1,7 +1,8 @@
 version: 2.1
 executors: 
   node-executor:
-    - image: circleci/node:10-jessie
+    docker:   
+      - image: circleci/node:10-jessie
 
 jobs: 
   hello-world: 
